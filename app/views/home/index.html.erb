@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Country Guessr</title>
+  <style>
+    /* Ajout d'un fond stylisé avec animation */
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #1E3C72, #2A5298); /* Dégradé bleu */
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Animation subtile de l'arrière-plan */
+    body::before {
+      content: "";
+      position: absolute;
+      top: -10%;
+      left: -10%;
+      width: 120%;
+      height: 120%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 10%, transparent 80%);
+      animation: moveBg 10s infinite alternate ease-in-out;
+    }
+
+    @keyframes moveBg {
+      from { transform: translateX(0px) translateY(0px); }
+      to { transform: translateX(20px) translateY(20px); }
+    }
+
+    /* Style du conteneur principal */
+    .container {
+      max-width: 400px;
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+      position: relative;
+      z-index: 1;
+    }
+    /* Conteneur du menu déroulant */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Bouton du pseudo */
+.btn-login {
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  padding-right: 20px;
+}
+
+/* Le menu déroulant (caché par défaut) */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  min-width: 120px;
+  top: 45px;
+  right: 0;
+  z-index: 100;
+}
+
+/* Élément du menu */
+.dropdown-item {
+  display: block;
+  padding: 10px;
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+}
+
+.dropdown-item:hover {
+  background: #f4f4f4;
+}
+
+/* Affichage du menu lors du clic */
+.show-menu {
+  display: block;
+}
+
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    /* Style des boutons */
+    .btn {
+      display: block;
+      width: 100%;
+      font-size: 1.5em;
+      padding: 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+    }
+
+    /* Style du bouton "JOUER" */
+.btn-play {
+  background: #28a745;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 20px;
+  width: calc(100% - 30px); /* 🔥 S'assure que le bouton ne déborde pas */
+  max-width: 100%;
+  display: block;
+  text-align: center;
+  padding: 15px;
+}
+
+.btn-play:hover {
+  background: #218838;
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Conteneur des boutons CLASSEMENT et LOGIN */
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+}
+
+/* Boutons inférieurs bien alignés */
+.btn-secondary, .btn-login {
+  flex: 1;
+  padding: 15px;
+  text-align: center;
+}
+
+    .btn-secondary {
+      background: #007bff;
+      color: white;
+    }
+    .btn-secondary:hover {
+      background: #0056b3;
+      transform: scale(1.05);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-login {
+      background: #ffc107;
+      color: black;
+    }
+    .btn-login:hover {
+      background: #e0a800;
+      transform: scale(1.05);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Bienvenue sur Country Guessr</h1>
+
+    <!-- Bouton "JOUER" -->
+    <a href="<%= game_path %>" class="btn btn-play">JOUER</a>
+
+    <!-- Deux boutons en dessous -->
+  <div class="btn-container">
+  <a href="<%= ranking_path %>" class="btn btn-secondary">CLASSEMENT</a>
+
+  <% if user_signed_in? %>
+    <!-- Bouton pseudo avec menu déroulant -->
+    <div class="dropdown">
+      <button id="user-menu-btn" class="btn btn-login"><%= current_user.pseudo.presence || "Mon Profil" %> ▼</button>
+      <div id="dropdown-menu" class="dropdown-menu">
+       <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "dropdown-item" %>
+      </div>
+    </div>
+  <% else %>
+    <a href="<%= new_user_session_path %>" class="btn btn-login">LOGIN</a>
+  <% end %>
+</div>
+
+
+
+
+  </div>
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const userMenuBtn = document.getElementById("user-menu-btn");
+    const dropdownMenu = document.getElementById("dropdown-menu");
+
+    if (userMenuBtn) {
+      userMenuBtn.addEventListener("click", function(event) {
+        event.stopPropagation(); // Empêche la propagation du clic
+        dropdownMenu.classList.toggle("show-menu"); // Afficher ou cacher le menu
+      });
+
+      // Fermer le menu si on clique ailleurs
+      document.addEventListener("click", function(event) {
+        if (!userMenuBtn.contains(event.target) && !dropdownMenu.contains(event.target)) {
+          dropdownMenu.classList.remove("show-menu");
+        }
+      });
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,132 @@
+<h1>Devine le pays !</h1>
+
+<!-- Affichage du score -->
+<p id="score-display">Score : <span id="score"><%= current_user.score %></span> points</p>
+
+<!-- Conteneur où l'image et le formulaire sont chargés -->
+<turbo-frame id="game-container">
+  <%= render "game/game_content", image: @image %>
+</turbo-frame>
+
+<!-- Message dynamique -->
+<p id="game-message"></p>
+
+
+<!-- Gestion du Timer en JavaScript -->
+<script>
+  let timerInterval; // Stocke l'intervalle du timer
+
+  document.addEventListener("DOMContentLoaded", function() {
+    startTimer();
+    attachFormSubmitListener();
+  });
+
+  // Démarrer le timer
+  function startTimer() {
+    let timeLeft = 20;
+    const countdownElement = document.getElementById("countdown");
+    const timerText = document.getElementById("timer-text");
+    const progressBar = document.getElementById("progress-bar");
+    const form = document.getElementById("guess-form");
+    const messageDisplay = document.getElementById("game-message");
+
+    if (timerInterval) clearInterval(timerInterval);
+
+    timerInterval = setInterval(() => {
+      countdownElement.textContent = timeLeft;
+      progressBar.style.width = `${(timeLeft / 20) * 100}%`;
+
+      if (timeLeft <= 5) {
+        timerText.style.color = "red"; // 🔥 Change la couleur à rouge sous 5 secondes
+      }
+
+      if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        alert("⏳ Temps écoulé ! Vous avez perdu.");
+
+        fetch(form.action, {
+          method: "POST",
+          headers: {
+            "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content
+          },
+          body: new FormData(form)
+        })
+        .then(response => response.json())
+        .then(data => {
+          messageDisplay.textContent = data.message;
+          messageDisplay.style.color = "red";
+          setTimeout(loadNextImage, 2000); // 🔥 Charge une nouvelle image après 2s
+        })
+        .catch(error => console.error("Erreur après le temps écoulé :", error));
+      } else {
+        timeLeft--;
+      }
+    }, 1000);
+  }
+
+  // Charge une nouvelle image et réinitialise le timer et les événements
+  
+  function loadNextImage() {
+    fetch("/next_image")
+      .then(response => response.json())
+      .then(data => {
+        if (data.finished) {
+          alert("🎉 Bravo, tu as terminé le jeu !");
+          window.location.href = "/"; // 🔥 Redirige vers l'accueil si le jeu est fini
+        } else {
+          document.getElementById("game-container").innerHTML = data.html;
+          document.getElementById("game-message").textContent = ""; // 🔥 Efface le message précédent
+          setTimeout(() => {
+            startTimer(); // 🔥 Redémarrer le timer
+            attachFormSubmitListener(); // 🔥 Réattacher l'écouteur d'événement pour le nouveau formulaire
+          }, 500);
+        }
+      })
+      .catch(error => console.error("Erreur lors du chargement de l'image :", error));
+  }
+
+  // Gère le formulaire et met à jour le score en temps réel
+  function attachFormSubmitListener() {
+    setTimeout(() => {
+      const form = document.getElementById("guess-form");
+
+      if (form) {
+        form.addEventListener("submit", function(event) {
+          event.preventDefault();
+
+          const formData = new FormData(form);
+
+          fetch(form.action, {
+            method: "POST",
+            headers: {
+              "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content
+            },
+            body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById("game-message").textContent = data.message;
+            
+            if (data.correct) {
+              document.getElementById("game-message").style.color = "green";
+              updateScore(data.score); // 🔥 Met à jour le score en direct
+              setTimeout(loadNextImage, 1000); // 🔥 Charge une nouvelle image après 1s
+            } else {
+              document.getElementById("game-message").style.color = "red";
+              document.getElementById("country-input").value = ""; // Permettre un nouvel essai
+            }
+          })
+          .catch(error => console.error("Erreur lors de la requête :", error));
+        });
+      }
+    }, 500);
+  }
+
+  // Met à jour l'affichage du score
+  function updateScore(newScore) {
+    const scoreElement = document.getElementById("score");
+    if (scoreElement) {
+      scoreElement.textContent = newScore;
+    }
+  }
+</script>

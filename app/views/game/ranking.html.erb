@@ -1,0 +1,22 @@
+<h1>🏆 Classement des joueurs 🏆</h1>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Position</th>
+      <th>Pseudo</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @players.each_with_index do |player, index| %>
+      <tr>
+        <td>#<%= index + 1 %></td>
+        <td><%= player.pseudo %></td>
+        <td><%= player.score %> points</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p><a href="<%= root_path %>">🏠 Retour au menu principal</a></p>
