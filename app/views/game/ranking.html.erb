@@ -1,22 +1,126 @@
-<h1>🏆 Classement des joueurs 🏆</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Classement</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #7928CA, #FF0080);
+      font-family: 'Fredoka', sans-serif;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+      margin: 0;
+    }
 
-<table border="1">
-  <thead>
-    <tr>
-      <th>Position</th>
-      <th>Pseudo</th>
-      <th>Score</th>
-    </tr>
-  </thead>
-  <tbody>
+    h1 {
+      font-size: 2.2em;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .ranking-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .player-card {
+      background: white;
+      color: #333;
+      border-radius: 15px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      transition: transform 0.2s;
+    }
+
+    .player-card:hover {
+      transform: scale(1.03);
+    }
+
+    .position {
+      font-size: 1.3em;
+      font-weight: bold;
+      width: 20%;
+      min-width: 60px;
+    }
+
+    .nickname {
+      flex-grow: 1;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.1em;
+      width: 50%;
+    }
+
+    .score {
+      font-size: 1em;
+      font-weight: bold;
+      width: 30%;
+      text-align: right;
+      min-width: 80px;
+    }
+
+    .first { background: #FFD700; }
+    .second { background: #C0C0C0; }
+    .third { background: #CD7F32; }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 30px;
+      background: white;
+      color: #7928CA;
+      padding: 15px 25px;
+      border-radius: 10px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .back-btn:hover {
+      background: #f0f0f0;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8em;
+      }
+
+      .player-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .position,
+      .nickname,
+      .score {
+        width: 100%;
+        margin: 5px 0;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>🏆 Classement des joueurs 🏆</h1>
+
+  <div class="ranking-container">
     <% @players.each_with_index do |player, index| %>
-      <tr>
-        <td>#<%= index + 1 %></td>
-        <td><%= player.pseudo %></td>
-        <td><%= player.score %> points</td>
-      </tr>
+      <div class="player-card <%= 'first' if index == 0 %><%= ' second' if index == 1 %><%= ' third' if index == 2 %>">
+        <div class="position">#<%= index + 1 %></div>
+        <div class="nickname"><%= player.pseudo %></div>
+        <div class="score"><%= player.score %> pts</div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
 
-<p><a href="<%= root_path %>">🏠 Retour au menu principal</a></p>
+  <a href="<%= root_path %>" class="back-btn">🏠 Retour au menu principal</a>
+</body>
+</html>

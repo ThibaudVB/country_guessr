@@ -1,23 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Country Guessr</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    /* Ajout d'un fond stylisé avec animation */
+    /* Style global de la page */
     body {
-      font-family: 'Arial', sans-serif;
-      text-align: center;
-      background: linear-gradient(135deg, #1E3C72, #2A5298); /* Dégradé bleu */
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #9c27b0, #3f51b5); /* Dégradé dynamique violet-bleu */
+      color: #fff;
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 0;
       overflow: hidden;
       position: relative;
     }
 
-    /* Animation subtile de l'arrière-plan */
+    /* Animation subtile du fond */
     body::before {
       content: "";
       position: absolute;
@@ -25,148 +29,175 @@
       left: -10%;
       width: 120%;
       height: 120%;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 10%, transparent 80%);
-      animation: moveBg 10s infinite alternate ease-in-out;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 10%, transparent 80%);
+      animation: moveBg 20s infinite alternate ease-in-out;
     }
 
     @keyframes moveBg {
-      from { transform: translateX(0px) translateY(0px); }
-      to { transform: translateX(20px) translateY(20px); }
+      from {
+        transform: translateX(0px) translateY(0px);
+      }
+      to {
+        transform: translateX(30px) translateY(30px);
+      }
     }
 
-    /* Style du conteneur principal */
+    /* Conteneur principal */
     .container {
-      max-width: 400px;
-      background: white;
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
       position: relative;
       z-index: 1;
+      padding: 60px 40px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 40px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      width: 90%;
+      max-width: 600px;
+      animation: slideUp 1.5s ease-out forwards;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transform: translateY(50px);
     }
-    /* Conteneur du menu déroulant */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
 
-/* Bouton du pseudo */
-.btn-login {
-  position: relative;
-  cursor: pointer;
-  width: 100%;
-  text-align: center;
-  padding-right: 20px;
-}
-
-/* Le menu déroulant (caché par défaut) */
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  background: white;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-  min-width: 120px;
-  top: 45px;
-  right: 0;
-  z-index: 100;
-}
-
-/* Élément du menu */
-.dropdown-item {
-  display: block;
-  padding: 10px;
-  color: black;
-  text-decoration: none;
-  text-align: center;
-  font-weight: bold;
-  border-bottom: 1px solid #ddd;
-}
-
-.dropdown-item:hover {
-  background: #f4f4f4;
-}
-
-/* Affichage du menu lors du clic */
-.show-menu {
-  display: block;
-}
-
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(100px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
     h1 {
-      font-size: 2em;
-      margin-bottom: 30px;
-      color: #333;
+      font-size: 3rem;
+      font-weight: 600;
+      color: #3f51b5;
+      margin-bottom: 50px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    h1:hover {
+      transform: scale(1.1);
+      color: #ffeb3b;
     }
 
     /* Style des boutons */
     .btn {
-      display: block;
+      display: inline-block;
       width: 100%;
-      font-size: 1.5em;
-      padding: 15px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      text-decoration: none;
+      padding: 20px 0;
+      font-size: 1.6rem;
+      font-weight: 600;
       text-align: center;
-      transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+      margin: 20px 0;
+      cursor: pointer;
     }
 
-    /* Style du bouton "JOUER" */
-.btn-play {
-  background: #28a745;
-  color: white;
-  font-weight: bold;
-  margin-bottom: 20px;
-  width: calc(100% - 30px); /* 🔥 S'assure que le bouton ne déborde pas */
-  max-width: 100%;
-  display: block;
-  text-align: center;
-  padding: 15px;
-}
-
-.btn-play:hover {
-  background: #218838;
-  transform: scale(1.05);
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Conteneur des boutons CLASSEMENT et LOGIN */
-.btn-container {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  width: 100%;
-}
-
-/* Boutons inférieurs bien alignés */
-.btn-secondary, .btn-login {
-  flex: 1;
-  padding: 15px;
-  text-align: center;
-}
-
-    .btn-secondary {
-      background: #007bff;
+    .btn-play {
+      background: linear-gradient(45deg, #ff4081, #d500f9);
       color: white;
     }
-    .btn-secondary:hover {
-      background: #0056b3;
-      transform: scale(1.05);
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+
+    .btn-play:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-ranking {
+      background: linear-gradient(45deg, #00bcd4, #4caf50);
+      color: white;
+    }
+
+    .btn-ranking:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
 
     .btn-login {
-      background: #ffc107;
+      background: linear-gradient(45deg, #ffeb3b, #ff9800);
       color: black;
     }
+
     .btn-login:hover {
-      background: #e0a800;
-      transform: scale(1.05);
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      transform: scale(1.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
 
+    /* Disposition des boutons avec un espacement égal */
+    .btn-container {
+      display: flex;
+      flex-direction: column;
+      gap: 30px; /* Espacement égal entre les boutons */
+      width: 100%;
+    }
+
+    .btn-container a {
+      flex: 1; /* Cela donne une largeur égale à chaque bouton */
+    }
+
+    /* Menu déroulant */
+    .dropdown {
+      position: relative;
+      width: 100%;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 50px;
+      left: 0;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      z-index: 100;
+      min-width: 100%;
+    }
+
+    .dropdown-item {
+      padding: 12px;
+      color: #333;
+      text-decoration: none;
+      text-align: center;
+      font-weight: 600;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .dropdown-item:hover {
+      background: #f4f4f4;
+    }
+
+    .show-menu {
+      display: block;
+    }
+
+    /* Adaptation mobile */
+    @media (max-width: 480px) {
+      .container {
+        padding: 40px 20px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .btn {
+        font-size: 1.4rem;
+      }
+
+      .btn-container {
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
 <body>
@@ -176,47 +207,42 @@
     <!-- Bouton "JOUER" -->
     <a href="<%= game_path %>" class="btn btn-play">JOUER</a>
 
-    <!-- Deux boutons en dessous -->
-  <div class="btn-container">
-  <a href="<%= ranking_path %>" class="btn btn-secondary">CLASSEMENT</a>
+    <!-- Conteneur des boutons -->
+    <div class="btn-container">
+      <a href="<%= ranking_path %>" class="btn btn-ranking">CLASSEMENT</a>
 
-  <% if user_signed_in? %>
-    <!-- Bouton pseudo avec menu déroulant -->
-    <div class="dropdown">
-      <button id="user-menu-btn" class="btn btn-login"><%= current_user.pseudo.presence || "Mon Profil" %> ▼</button>
-      <div id="dropdown-menu" class="dropdown-menu">
-       <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "dropdown-item" %>
-      </div>
+      <% if user_signed_in? %>
+        <!-- Menu déroulant pour le pseudo -->
+        <div class="dropdown">
+          <button id="user-menu-btn" class="btn btn-login"><%= current_user.pseudo.presence || "Mon Profil" %> ▼</button>
+          <div id="dropdown-menu" class="dropdown-menu">
+            <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "dropdown-item" %>
+          </div>
+        </div>
+      <% else %>
+        <a href="<%= new_user_session_path %>" class="btn btn-login">LOGIN</a>
+      <% end %>
     </div>
-  <% else %>
-    <a href="<%= new_user_session_path %>" class="btn btn-login">LOGIN</a>
-  <% end %>
-</div>
-
-
-
-
   </div>
+
   <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const userMenuBtn = document.getElementById("user-menu-btn");
-    const dropdownMenu = document.getElementById("dropdown-menu");
+    document.addEventListener("DOMContentLoaded", function() {
+      const userMenuBtn = document.getElementById("user-menu-btn");
+      const dropdownMenu = document.getElementById("dropdown-menu");
 
-    if (userMenuBtn) {
-      userMenuBtn.addEventListener("click", function(event) {
-        event.stopPropagation(); // Empêche la propagation du clic
-        dropdownMenu.classList.toggle("show-menu"); // Afficher ou cacher le menu
-      });
+      if (userMenuBtn) {
+        userMenuBtn.addEventListener("click", function(event) {
+          event.stopPropagation();
+          dropdownMenu.classList.toggle("show-menu");
+        });
 
-      // Fermer le menu si on clique ailleurs
-      document.addEventListener("click", function(event) {
-        if (!userMenuBtn.contains(event.target) && !dropdownMenu.contains(event.target)) {
-          dropdownMenu.classList.remove("show-menu");
-        }
-      });
-    }
-  });
-</script>
-
+        document.addEventListener("click", function(event) {
+          if (!userMenuBtn.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.classList.remove("show-menu");
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>
