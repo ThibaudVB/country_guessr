@@ -3,141 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Country Guessr</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <title>Country Guessr - Accueil</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
   <style>
     /* Style global de la page */
     body {
+      background: linear-gradient(135deg, #7928CA, #FF0080); /* Dégradé violet-rose dynamique */
+      font-family: 'Fredoka', sans-serif;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
       margin: 0;
-      padding: 0;
-      font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, #9c27b0, #3f51b5); /* Dégradé dynamique violet-bleu */
-      color: #fff;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      position: relative;
     }
 
-    /* Animation subtile du fond */
-    body::before {
-      content: "";
-      position: absolute;
-      top: -10%;
-      left: -10%;
-      width: 120%;
-      height: 120%;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 10%, transparent 80%);
-      animation: moveBg 20s infinite alternate ease-in-out;
-    }
-
-    @keyframes moveBg {
-      from {
-        transform: translateX(0px) translateY(0px);
-      }
-      to {
-        transform: translateX(30px) translateY(30px);
-      }
+    h1 {
+      font-size: 2.4em;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     }
 
     /* Conteneur principal */
     .container {
-      position: relative;
-      z-index: 1;
-      padding: 60px 40px;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 40px;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-      text-align: center;
-      width: 90%;
       max-width: 600px;
-      animation: slideUp 1.5s ease-out forwards;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      transform: translateY(50px);
+      margin: 0 auto;
     }
 
-    @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(100px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    h1 {
-      font-size: 3rem;
-      font-weight: 600;
-      color: #3f51b5;
-      margin-bottom: 50px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      text-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease;
-    }
-
-    h1:hover {
-      transform: scale(1.1);
-      color: #ffeb3b;
-    }
-
-    /* Style des boutons */
+    /* Bouton "JOUER", "CLASSEMENT", et "LOGIN" */
     .btn {
       display: inline-block;
       width: 100%;
-      padding: 20px 0;
+      padding: 18px 0;
       font-size: 1.6rem;
       font-weight: 600;
       text-align: center;
       text-decoration: none;
-      border-radius: 50px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+      border-radius: 12px; /* Boutons légèrement plus arrondis */
       margin: 20px 0;
       cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
     }
 
     .btn-play {
-      background: linear-gradient(45deg, #ff4081, #d500f9);
+      background: #4CAF50; /* Vert vif */
       color: white;
     }
 
     .btn-play:hover {
-      transform: scale(1.1);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      background: #388E3C; /* Vert plus foncé au survol */
     }
 
     .btn-ranking {
-      background: linear-gradient(45deg, #00bcd4, #4caf50);
+      background: #FF9800; /* Orange vif */
       color: white;
     }
 
     .btn-ranking:hover {
-      transform: scale(1.1);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      background: #F57C00; /* Orange foncé au survol */
     }
 
     .btn-login {
-      background: linear-gradient(45deg, #ffeb3b, #ff9800);
-      color: black;
+      background: #2196F3; /* Bleu clair */
+      color: white;
+      position: relative;
     }
 
     .btn-login:hover {
-      transform: scale(1.1);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      background: #1976D2; /* Bleu foncé au survol */
     }
 
-    /* Disposition des boutons avec un espacement égal */
+    /* Menu déroulant pour login/déconnexion */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%; /* Placer sous le bouton */
+      left: 0;
+      background: linear-gradient(45deg, #2196F3, #1976D2); /* Dégradé bleu */
+      color: white;
+      border-radius: 12px; /* Arrondi identique aux boutons */
+      width: 100%;
+      opacity: 0; /* Masqué initialement */
+      transform: translateY(-20px); /* Déplacement du menu avant animation */
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .dropdown-item {
+      padding: 12px;
+      font-weight: 600;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .dropdown-item:hover {
+      background: #1565C0;
+    }
+
+    .show-menu {
+      display: block;
+      opacity: 1;
+      transform: translateY(0); /* Effet de glissement vers le bas */
+    }
+
+    /* Espacement égal entre les boutons */
     .btn-container {
       display: flex;
       flex-direction: column;
-      gap: 30px; /* Espacement égal entre les boutons */
+      gap: 20px; /* Espacement égal entre les boutons */
       width: 100%;
     }
 
@@ -145,70 +130,51 @@
       flex: 1; /* Cela donne une largeur égale à chaque bouton */
     }
 
-    /* Menu déroulant */
-    .dropdown {
-      position: relative;
-      width: 100%;
-    }
-
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 50px;
-      left: 0;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      z-index: 100;
-      min-width: 100%;
-    }
-
-    .dropdown-item {
-      padding: 12px;
-      color: #333;
-      text-decoration: none;
-      text-align: center;
-      font-weight: 600;
-      border-bottom: 1px solid #ddd;
-    }
-
-    .dropdown-item:hover {
-      background: #f4f4f4;
-    }
-
-    .show-menu {
-      display: block;
-    }
-
     /* Adaptation mobile */
-    @media (max-width: 480px) {
-      .container {
-        padding: 40px 20px;
-      }
-
+    @media (max-width: 768px) {
       h1 {
         font-size: 2rem;
       }
 
       .btn {
         font-size: 1.4rem;
+        padding: 18px 0;
+      }
+
+      .container {
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      .btn {
+        font-size: 1.2rem;
+        padding: 15px 0;
       }
 
       .btn-container {
         flex-direction: column;
       }
+
+      .btn-container a {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
+  <h1>Bienvenue sur Country Guessr</h1>
+
+  <!-- Conteneur des boutons -->
   <div class="container">
-    <h1>Bienvenue sur Country Guessr</h1>
-
-    <!-- Bouton "JOUER" -->
-    <a href="<%= game_path %>" class="btn btn-play">JOUER</a>
-
-    <!-- Conteneur des boutons -->
     <div class="btn-container">
+      <!-- Bouton "JOUER" -->
+      <a href="<%= game_path %>?reload=true" class="btn btn-play">JOUER</a>
+      <!-- Bouton "CLASSEMENT" -->
       <a href="<%= ranking_path %>" class="btn btn-ranking">CLASSEMENT</a>
 
       <% if user_signed_in? %>
@@ -216,10 +182,11 @@
         <div class="dropdown">
           <button id="user-menu-btn" class="btn btn-login"><%= current_user.pseudo.presence || "Mon Profil" %> ▼</button>
           <div id="dropdown-menu" class="dropdown-menu">
-            <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "dropdown-item" %>
+            <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "dropdown-item btn-logout" %>
           </div>
         </div>
       <% else %>
+        <!-- Si non connecté, bouton LOGIN sans menu déroulant -->
         <a href="<%= new_user_session_path %>" class="btn btn-login">LOGIN</a>
       <% end %>
     </div>

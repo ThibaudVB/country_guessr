@@ -1,31 +1,156 @@
-<h2>Inscription</h2>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Country Guessr - Inscription</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Style global de la page */
+    body {
+      background: linear-gradient(135deg, #7928CA, #FF0080); /* Dégradé violet-rose dynamique */
+      font-family: 'Fredoka', sans-serif;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+      margin: 0;
+    }
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+    h2 {
+      font-size: 2.4em;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
 
-  <p>
-    <%= f.label :pseudo %><br>
-    <%= f.text_field :pseudo, required: true %>
-  </p>
+    /* Conteneur principal */
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.8); /* Fond blanc semi-transparent */
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+    }
 
-  <p>
-    <%= f.label :email %><br>
-    <%= f.email_field :email, required: true %>
-  </p>
+    /* Style du formulaire */
+    .field {
+      margin-bottom: 20px;
+    }
 
-  <p>
-    <%= f.label :password %><br>
-    <%= f.password_field :password, required: true %>
-  </p>
+    .field label {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #333;
+    }
 
-  <p>
-    <%= f.label :password_confirmation, "Confirmer le mot de passe" %><br>
-    <%= f.password_field :password_confirmation, required: true %>
-  </p>
+    .field input {
+      width: 100%;
+      padding: 12px;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-top: 8px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
 
-  <p>
-    <%= f.submit "S'inscrire" %>
-  </p>
-<% end %>
+    .field input:focus {
+      border-color: #FF0080;
+      box-shadow: 0 0 10px rgba(255, 0, 128, 0.5);
+    }
 
-<p>Déjà un compte ? <a href="<%= new_user_session_path %>">Se connecter</a></p>
+    .actions {
+      margin-top: 20px;
+    }
+
+    .actions input[type="submit"] {
+      padding: 15px 25px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #4CAF50, #388E3C);
+      color: white;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    .actions input[type="submit"]:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      background: linear-gradient(135deg, #388E3C, #4CAF50);
+    }
+
+    /* Lien du bas */
+    .links {
+      margin-top: 20px;
+      font-size: 1rem;
+    }
+
+    .links a {
+      color: #FF0080;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+    }
+
+    /* Adaptation mobile */
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 2rem;
+      }
+
+      .field input {
+        font-size: 1rem;
+      }
+
+      .actions input[type="submit"] {
+        font-size: 1rem;
+        padding: 12px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h2>Inscription</h2>
+
+  <!-- Conteneur du formulaire -->
+  <div class="container">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
+
+      <div class="field">
+        <%= f.label :pseudo, "Pseudo" %><br>
+        <%= f.text_field :pseudo, required: true %>
+      </div>
+
+      <div class="field">
+        <%= f.label :email, "Adresse email" %><br>
+        <%= f.email_field :email, required: true %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password, "Mot de passe" %><br>
+        <%= f.password_field :password, required: true %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation, "Confirmer le mot de passe" %><br>
+        <%= f.password_field :password_confirmation, required: true %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "S'inscrire" %>
+      </div>
+    <% end %>
+
+    <!-- Lien pour la connexion -->
+    <div class="links">
+      Déjà un compte ? <a href="<%= new_user_session_path %>">Se connecter</a>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,132 +1,300 @@
-<h1>Devine le pays !</h1>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Country Guessr - Devine le pays !</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Style global de la page */
+    body {
+      background: linear-gradient(135deg, #7928CA, #FF0080); /* Dégradé violet-rose dynamique */
+      font-family: 'Fredoka', sans-serif;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+      margin: 0;
+    }
 
-<!-- Affichage du score -->
-<p id="score-display">Score : <span id="score"><%= current_user.score %></span> points</p>
+    h1 {
+      font-size: 2.4em;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
 
-<!-- Conteneur où l'image et le formulaire sont chargés -->
-<turbo-frame id="game-container">
-  <%= render "game/game_content", image: @image %>
-</turbo-frame>
+    /* Conteneur principal du jeu */
+    .game-container {
+      background: rgba(255, 255, 255, 0.8); /* Fond blanc semi-transparent */
+      border-radius: 15px;
+      padding: 40px;
+      max-width: 600px;
+      margin: 0 auto;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+    }
 
-<!-- Message dynamique -->
-<p id="game-message"></p>
+    /* Affichage du score dans un conteneur avec esquisse noire */
+    #score-display {
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+      background-color: white;
+      color: black;
+      padding: 10px 20px;
+      border-radius: 12px;
+      border: 3px solid black; /* Esquisse noire */
+      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
 
+    /* Conteneur pour l'image et le formulaire */
+    .image-container {
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
 
-<!-- Gestion du Timer en JavaScript -->
-<script>
-  let timerInterval; // Stocke l'intervalle du timer
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* L'image remplira le conteneur avec un effet de recadrage */
+    }
 
-  document.addEventListener("DOMContentLoaded", function() {
-    startTimer();
-    attachFormSubmitListener();
-  });
+    /* Style du champ de saisie du pays */
+    #country-input {
+      width: 100%;
+      padding: 10px;
+      font-size: 1.2rem;
+      border-radius: 12px;
+      border: none;
+      margin-bottom: 20px;
+      transition: box-shadow 0.3s ease;
+    }
 
-  // Démarrer le timer
-  function startTimer() {
-    let timeLeft = 20;
-    const countdownElement = document.getElementById("countdown");
-    const timerText = document.getElementById("timer-text");
-    const progressBar = document.getElementById("progress-bar");
-    const form = document.getElementById("guess-form");
-    const messageDisplay = document.getElementById("game-message");
+    #country-input:focus {
+      box-shadow: 0 0 10px rgba(255, 0, 128, 0.6);
+    }
 
-    if (timerInterval) clearInterval(timerInterval);
+    /* Bouton de validation */
+    #guess-button {
+      padding: 12px 20px;
+      font-size: 1.4rem;
+      font-weight: bold;
+      background: #FF4081; /* Rose vif */
+      color: white;
+      border-radius: 25px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
 
-    timerInterval = setInterval(() => {
-      countdownElement.textContent = timeLeft;
-      progressBar.style.width = `${(timeLeft / 20) * 100}%`;
+    #guess-button:hover {
+      background: #F50057; /* Rose foncé */
+      transform: scale(1.1);
+    }
 
-      if (timeLeft <= 5) {
-        timerText.style.color = "red"; // 🔥 Change la couleur à rouge sous 5 secondes
+    /* Bouton Quitter */
+    #quit-button {
+      padding: 12px 20px;
+      font-size: 1.4rem;
+      font-weight: bold;
+      background: #FF9800; /* Orange vif */
+      color: white;
+      border-radius: 25px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      margin-top: 20px;
+    }
+
+    #quit-button:hover {
+      background: #F57C00; /* Orange foncé */
+      transform: scale(1.1);
+    }
+
+    /* Message dynamique */
+    #game-message {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    /* Animation de la barre de progression du timer */
+    #progress-bar {
+      width: 100%;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+
+    /* Style du message de fin de timer */
+    #countdown {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    /* Espacement entre les éléments */
+    .element-spacing {
+      margin-bottom: 20px;
+    }
+
+    /* Adaptation mobile */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
       }
 
-      if (timeLeft <= 0) {
-        clearInterval(timerInterval);
-        alert("⏳ Temps écoulé ! Vous avez perdu.");
+      .game-container {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Devine le pays !</h1>
 
-        fetch(form.action, {
-          method: "POST",
-          headers: {
-            "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content
-          },
-          body: new FormData(form)
-        })
+  <!-- Affichage du score -->
+  <p id="score-display">Score : <span id="score"><%= current_user.score %></span> points</p>
+
+  <!-- Conteneur du jeu -->
+  <div class="game-container">
+    <turbo-frame id="game-container">
+      <%= render "game/game_content", image: @image %>
+    </turbo-frame>
+
+    <!-- Message dynamique -->
+    <p id="game-message"></p>
+
+    <!-- Bouton Quitter -->
+    <button id="quit-button" onclick="quitGame()">Quitter le jeu</button>
+  </div>
+
+  <!-- Gestion du Timer en JavaScript -->
+  <script>
+    let timerInterval; // Stocke l'intervalle du timer
+    let timeLeft = 20; // Durée initiale du timer
+  
+    document.addEventListener("turbo:load", function() {
+      startTimer();
+      attachFormSubmitListener();
+    });
+  
+    // Démarrer le timer
+    function startTimer() {
+      const countdownElement = document.getElementById("countdown");
+      const progressBar = document.getElementById("progress-bar");
+  
+      if (timerInterval) clearInterval(timerInterval);
+  
+      timerInterval = setInterval(() => {
+        countdownElement.textContent = timeLeft;
+        progressBar.style.width = `${(timeLeft / 20) * 100}%`;
+  
+        if (timeLeft <= 5) {
+          countdownElement.style.color = "red"; // 🔥 Change la couleur à rouge sous 5 secondes
+        }
+  
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          alert("⏳ Temps écoulé ! Vous avez perdu.");
+  
+          fetch("/next_image", { method: "GET" })
+            .then(response => response.json())
+            .then(data => {
+              document.getElementById("game-message").textContent = data.message;
+              document.getElementById("game-message").style.color = "red";
+              setTimeout(loadNextImage, 2000); // 🔥 Charge une nouvelle image après 2s
+            })
+            .catch(error => console.error("Erreur après le temps écoulé :", error));
+        } else {
+          timeLeft--;
+        }
+      }, 1000);
+    }
+  
+    // Charge une nouvelle image et réinitialise le timer et les événements
+    function loadNextImage() {
+      fetch("/next_image")
         .then(response => response.json())
         .then(data => {
-          messageDisplay.textContent = data.message;
-          messageDisplay.style.color = "red";
-          setTimeout(loadNextImage, 2000); // 🔥 Charge une nouvelle image après 2s
+          if (data.finished) {
+            alert("🎉 Bravo, tu as terminé le jeu !");
+            window.location.href = "/"; // 🔥 Redirige vers l'accueil si le jeu est fini
+          } else {
+            document.getElementById("game-container").innerHTML = data.html;
+            document.getElementById("game-message").textContent = ""; // 🔥 Efface le message précédent
+            timeLeft = 20; // Réinitialiser le temps pour la prochaine image
+            setTimeout(() => {
+              startTimer(); // 🔥 Redémarrer le timer
+              attachFormSubmitListener(); // 🔥 Réattacher l'écouteur d'événement pour le nouveau formulaire
+            }, 500);
+          }
         })
-        .catch(error => console.error("Erreur après le temps écoulé :", error));
-      } else {
-        timeLeft--;
-      }
-    }, 1000);
-  }
-
-  // Charge une nouvelle image et réinitialise le timer et les événements
-  
-  function loadNextImage() {
-    fetch("/next_image")
-      .then(response => response.json())
-      .then(data => {
-        if (data.finished) {
-          alert("🎉 Bravo, tu as terminé le jeu !");
-          window.location.href = "/"; // 🔥 Redirige vers l'accueil si le jeu est fini
-        } else {
-          document.getElementById("game-container").innerHTML = data.html;
-          document.getElementById("game-message").textContent = ""; // 🔥 Efface le message précédent
-          setTimeout(() => {
-            startTimer(); // 🔥 Redémarrer le timer
-            attachFormSubmitListener(); // 🔥 Réattacher l'écouteur d'événement pour le nouveau formulaire
-          }, 500);
-        }
-      })
-      .catch(error => console.error("Erreur lors du chargement de l'image :", error));
-  }
-
-  // Gère le formulaire et met à jour le score en temps réel
-  function attachFormSubmitListener() {
-    setTimeout(() => {
-      const form = document.getElementById("guess-form");
-
-      if (form) {
-        form.addEventListener("submit", function(event) {
-          event.preventDefault();
-
-          const formData = new FormData(form);
-
-          fetch(form.action, {
-            method: "POST",
-            headers: {
-              "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content
-            },
-            body: formData
-          })
-          .then(response => response.json())
-          .then(data => {
-            document.getElementById("game-message").textContent = data.message;
-            
-            if (data.correct) {
-              document.getElementById("game-message").style.color = "green";
-              updateScore(data.score); // 🔥 Met à jour le score en direct
-              setTimeout(loadNextImage, 1000); // 🔥 Charge une nouvelle image après 1s
-            } else {
-              document.getElementById("game-message").style.color = "red";
-              document.getElementById("country-input").value = ""; // Permettre un nouvel essai
-            }
-          })
-          .catch(error => console.error("Erreur lors de la requête :", error));
-        });
-      }
-    }, 500);
-  }
-
-  // Met à jour l'affichage du score
-  function updateScore(newScore) {
-    const scoreElement = document.getElementById("score");
-    if (scoreElement) {
-      scoreElement.textContent = newScore;
+        .catch(error => console.error("Erreur lors du chargement de l'image :", error));
     }
-  }
-</script>
+  
+    // Gère le formulaire et met à jour le score en temps réel
+    function attachFormSubmitListener() {
+      setTimeout(() => {
+        const form = document.getElementById("guess-form");
+  
+        if (form) {
+          form.addEventListener("submit", function(event) {
+            event.preventDefault();
+  
+            const formData = new FormData(form);
+  
+            fetch(form.action, {
+              method: "POST",
+              headers: {
+                "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content
+              },
+              body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+              document.getElementById("game-message").textContent = data.message;
+              
+              if (data.correct) {
+                document.getElementById("game-message").style.color = "green";
+                updateScore(data.score); // 🔥 Met à jour le score en direct
+                setTimeout(loadNextImage, 1000); // 🔥 Charge une nouvelle image après 1s
+              } else {
+                document.getElementById("game-message").style.color = "red";
+                document.getElementById("country-input").value = ""; // Permettre un nouvel essai
+              }
+            })
+            .catch(error => console.error("Erreur lors de la requête :", error));
+          });
+        }
+      }, 500);
+    }
+  
+    // Met à jour l'affichage du score avec une animation progressive
+    function updateScore(newScore) {
+      const scoreElement = document.getElementById("score");
+      const currentScore = parseInt(scoreElement.textContent);
+      const targetScore = newScore;
+      let increment = targetScore > currentScore ? 1 : -1;
+      let current = currentScore;
+  
+      const interval = setInterval(function() {
+        if (current === targetScore) {
+          clearInterval(interval); // Arrêter l'intervalle une fois que le score est atteint
+        } else {
+          current += increment;
+          scoreElement.textContent = current;
+        }
+      }, 30); // Le score se met à jour toutes les 30 ms
+    }
+
+    // Fonction pour quitter le jeu
+    function quitGame() {
+      if (confirm("Êtes-vous sûr de vouloir quitter le jeu ?")) {
+        window.location.href = "/"; // Redirige vers la page d'accueil
+      }
+    }
+  </script>
+</body>
+</html>
