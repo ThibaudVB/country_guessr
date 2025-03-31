@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "2.6.3" # Remplace "3.3.7" par la version de Ruby que tu utilises
+ruby "3.3.7" # Remplace "3.3.7" par la version de Ruby que tu utilises
 
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
