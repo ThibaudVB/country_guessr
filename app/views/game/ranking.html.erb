@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    /* Style global de la page */
     body {
       background: linear-gradient(135deg, #7928CA, #FF0080);
       font-family: 'Fredoka', sans-serif;
@@ -12,17 +13,56 @@
       text-align: center;
       padding: 40px 20px;
       margin: 0;
+      opacity: 0;
+      animation: fadeIn 1.5s forwards; /* Animation d'entrée pour le body */
+    }
+
+    /* Animation de fondu en entrée */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
 
     h1 {
       font-size: 2.2em;
       margin-bottom: 30px;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      animation: slideInFromTop 1s ease-out forwards;
+    }
+
+    /* Animation pour le titre */
+    @keyframes slideInFromTop {
+      from {
+        transform: translateY(-100px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
     .ranking-container {
       max-width: 600px;
       margin: 0 auto;
+      opacity: 0;
+      animation: fadeInUp 1.5s 1s forwards; /* Animation d'entrée pour le conteneur */
+    }
+
+    /* Animation des éléments de classement */
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
     .player-card {
@@ -36,7 +76,21 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      transition: transform 0.2s;
+      transition: transform 0.2s ease;
+      opacity: 0;
+      animation: fadeInCard 0.5s ease-in-out forwards;
+    }
+
+    /* Animation pour chaque carte de joueur */
+    @keyframes fadeInCard {
+      from {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
     .player-card:hover {
@@ -80,6 +134,20 @@
       font-weight: bold;
       text-decoration: none;
       transition: background 0.2s, transform 0.2s;
+      opacity: 0;
+      animation: fadeInBtn 1s 1.5s forwards; /* Animation pour le bouton de retour */
+    }
+
+    /* Animation pour le bouton */
+    @keyframes fadeInBtn {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
     .back-btn:hover {
