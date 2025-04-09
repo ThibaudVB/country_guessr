@@ -19,9 +19,4 @@ test:
   host: localhost
 
 production:
-  <<: *default
-  database: country_guessr_production
-  username: admin
-  password: <%= ENV['POSTGRES_PASSWORD'] %>
-  host: localhost
-
+  url: <%= ENV['DATABASE_URL'] %>
