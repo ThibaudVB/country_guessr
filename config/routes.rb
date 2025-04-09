@@ -1,11 +1,6 @@
 Rails.application.routes.draw do
-  root "home#index"  # Page d'accueil
+  get "/ping", to: proc { [200, {}, ["pong"]] }
 
-  devise_for :users  # 🔥 Génère toutes les routes d'authentification
-
-  get "game", to: "game#index"
-  post "guess", to: "game#guess"
-  get "next_image", to: "game#next_image"
-
-  get "ranking", to: "game#ranking"
+  # garde ça après :
+  root "home#index"
 end
