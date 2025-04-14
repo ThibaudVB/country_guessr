@@ -61630,3 +61630,650 @@ Processing by Devise::SessionsController#new as HTML
 Completed 200 OK in 647ms (Views: 3.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
 
 
+Started GET "/" for 127.0.0.1 at 2025-04-09 15:18:01 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CountryGuessr'*/[0m
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 4.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 27.7ms | GC: 0.0ms)
+Completed 200 OK in 1467ms (Views: 40.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/ranking" for 127.0.0.1 at 2025-04-09 15:18:06 +0200
+Processing by GameController#ranking as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering game/ranking.html.erb within layouts/application
+  [1m[36mUser Load (6.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."score" DESC LIMIT 10 /*action='ranking',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/views/game/ranking.html.erb:183:in `each_with_index'
+  Rendered game/ranking.html.erb within layouts/application (Duration: 51.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 77.8ms | GC: 0.0ms)
+Completed 200 OK in 853ms (Views: 64.1ms | ActiveRecord: 36.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2025-04-09 15:18:10 +0200
+Processing by HomeController#index as HTML
+Started GET "/game?reload=true" for 127.0.0.1 at 2025-04-09 15:18:10 +0200
+Processing by GameController#index as HTML
+  Parameters: {"reload"=>"true"}
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 2.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.3ms | GC: 0.0ms)
+Completed 200 OK in 955ms (Views: 8.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Completed 401 Unauthorized in 1044ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2025-04-09 15:18:11 +0200
+Started GET "/game?reload=true" for 127.0.0.1 at 2025-04-09 15:18:11 +0200
+Processing by Devise::SessionsController#new as HTML
+Processing by GameController#index as HTML
+  Parameters: {"reload"=>"true"}
+Completed 401 Unauthorized in 1502ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.9ms | GC: 0.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 14.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 15.2ms | GC: 0.0ms)
+Completed 200 OK in 1666ms (Views: 26.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2025-04-09 15:18:13 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 1.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2.5ms | GC: 0.0ms)
+Completed 200 OK in 666ms (Views: 3.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2025-04-09 15:18:14 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 1.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2.4ms | GC: 0.0ms)
+Completed 200 OK in 756ms (Views: 2.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2025-04-09 15:18:18 +0200
+Processing by Devise::SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Se connecter"}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'thibaud.von-borowski@mmibordeaux.com' ORDER BY "users"."id" ASC LIMIT 1 /*action='create',application='CountryGuessr',controller='sessions'*/[0m
+Redirected to http://127.0.0.1:3000/game?reload=true
+Completed 303 See Other in 1060ms (ActiveRecord: 1.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/game?reload=true" for 127.0.0.1 at 2025-04-09 15:18:19 +0200
+Processing by GameController#index as TURBO_STREAM
+  Parameters: {"reload"=>"true"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='index',application='CountryGuessr',controller='game'*/[0m
+  [1m[36mImage Exists? (8.2ms)[0m  [1m[34mSELECT 1 AS one FROM "images" WHERE 1=1 LIMIT 1 /*action='index',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:49:in `next_unique_image'
+  [1m[36mImage Load (0.3ms)[0m  [1m[34mSELECT "images".* FROM "images" WHERE 1=1 /*action='index',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:54:in `next_unique_image'
+  Rendering layout layouts/application.html.erb
+  Rendering game/index.html.erb within layouts/application
+  Rendered game/_game_content.html.erb (Duration: 1.9ms | GC: 0.0ms)
+  Rendered game/index.html.erb within layouts/application (Duration: 30.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 31.5ms | GC: 0.0ms)
+Completed 200 OK in 801ms (Views: 32.0ms | ActiveRecord: 12.1ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/guess" for 127.0.0.1 at 2025-04-09 15:18:28 +0200
+Processing by GameController#guess as */*
+  Parameters: {"authenticity_token"=>"[FILTERED]", "image_id"=>"7", "guessed_country"=>"Cambodge"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='guess',application='CountryGuessr',controller='game'*/[0m
+  [1m[36mImage Load (0.4ms)[0m  [1m[34mSELECT "images".* FROM "images" WHERE "images"."id" = 7 LIMIT 1 /*action='guess',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:9:in `guess'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*action='guess',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:20:in `guess'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."pseudo" = 'ThibaudVB' AND "users"."id" != 1 LIMIT 1 /*action='guess',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:20:in `guess'
+  [1m[36mUser Update (2.6ms)[0m  [1m[33mUPDATE "users" SET "score" = 130, "updated_at" = '2025-04-09 13:18:29.679294' WHERE "users"."id" = 1 /*action='guess',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:20:in `guess'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT /*action='guess',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:20:in `guess'
+Completed 200 OK in 817ms (Views: 0.2ms | ActiveRecord: 19.0ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/next_image" for 127.0.0.1 at 2025-04-09 15:18:30 +0200
+Processing by GameController#next_image as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='next_image',application='CountryGuessr',controller='game'*/[0m
+  [1m[36mImage Count (4.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "images" /*action='next_image',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:34:in `next_image'
+  [1m[36mImage Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "images" WHERE "images"."id" != 7 LIMIT 1 /*action='next_image',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:49:in `next_unique_image'
+  [1m[36mImage Load (0.5ms)[0m  [1m[34mSELECT "images".* FROM "images" WHERE "images"."id" != 7 /*action='next_image',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:54:in `next_unique_image'
+  Rendered game/_game_content.html.erb (Duration: 0.7ms | GC: 0.0ms)
+Completed 200 OK in 782ms (Views: 0.2ms | ActiveRecord: 5.8ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2025-04-09 15:18:35 +0200
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='index',application='CountryGuessr',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:220
+  Rendered home/index.html.erb within layouts/application (Duration: 3.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.8ms | GC: 0.0ms)
+Completed 200 OK in 725ms (Views: 4.7ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/ranking" for 127.0.0.1 at 2025-04-09 15:18:36 +0200
+Processing by GameController#ranking as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering game/ranking.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."score" DESC LIMIT 10 /*action='ranking',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/views/game/ranking.html.erb:183:in `each_with_index'
+  Rendered game/ranking.html.erb within layouts/application (Duration: 14.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 15.8ms | GC: 0.0ms)
+Completed 200 OK in 700ms (Views: 15.8ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/game?reload=true" for 127.0.0.1 at 2025-04-09 15:18:39 +0200
+Processing by GameController#index as HTML
+  Parameters: {"reload"=>"true"}
+Started GET "/ranking" for 127.0.0.1 at 2025-04-09 15:18:39 +0200
+Processing by GameController#ranking as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='index',application='CountryGuessr',controller='game'*/[0m
+  [1m[36mImage Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "images" WHERE "images"."id" NOT IN (7, 9) LIMIT 1 /*action='index',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:49:in `next_unique_image'
+  [1m[36mImage Load (0.6ms)[0m  [1m[34mSELECT "images".* FROM "images" WHERE "images"."id" NOT IN (7, 9) /*action='index',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:54:in `next_unique_image'
+  Rendering layout layouts/application.html.erb
+  Rendering game/index.html.erb within layouts/application
+  Rendered game/_game_content.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered game/index.html.erb within layouts/application (Duration: 1.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2.8ms | GC: 0.0ms)
+Completed 200 OK in 787ms (Views: 3.9ms | ActiveRecord: 2.2ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+  Rendering layout layouts/application.html.erb
+  Rendering game/ranking.html.erb within layouts/application
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."score" DESC LIMIT 10 /*action='ranking',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/views/game/ranking.html.erb:183:in `each_with_index'
+  Rendered game/ranking.html.erb within layouts/application (Duration: 6.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 9.7ms | GC: 0.0ms)
+Completed 200 OK in 786ms (Views: 9.5ms | ActiveRecord: 1.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2025-04-09 15:18:51 +0200
+Processing by HomeController#index as HTML
+Started GET "/game?reload=true" for 127.0.0.1 at 2025-04-09 15:18:51 +0200
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='index',application='CountryGuessr',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:220
+  Rendered home/index.html.erb within layouts/application (Duration: 4.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.9ms | GC: 0.0ms)
+Completed 200 OK in 691ms (Views: 6.0ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Processing by GameController#index as HTML
+  Parameters: {"reload"=>"true"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='index',application='CountryGuessr',controller='game'*/[0m
+  [1m[36mImage Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "images" WHERE "images"."id" NOT IN (7, 9) LIMIT 1 /*action='index',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:49:in `next_unique_image'
+  [1m[36mImage Load (0.3ms)[0m  [1m[34mSELECT "images".* FROM "images" WHERE "images"."id" NOT IN (7, 9) /*action='index',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:54:in `next_unique_image'
+  Rendering layout layouts/application.html.erb
+  Rendering game/index.html.erb within layouts/application
+  Rendered game/_game_content.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered game/index.html.erb within layouts/application (Duration: 0.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.4ms | GC: 0.0ms)
+Completed 200 OK in 724ms (Views: 1.9ms | ActiveRecord: 1.2ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/ranking" for 127.0.0.1 at 2025-04-09 15:18:52 +0200
+Processing by GameController#ranking as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering game/ranking.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."score" DESC LIMIT 10 /*action='ranking',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/views/game/ranking.html.erb:183:in `each_with_index'
+  Rendered game/ranking.html.erb within layouts/application (Duration: 3.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.4ms | GC: 0.0ms)
+Completed 200 OK in 681ms (Views: 4.2ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/game?reload=true" for 127.0.0.1 at 2025-04-09 15:18:54 +0200
+Started GET "/ranking" for 127.0.0.1 at 2025-04-09 15:18:54 +0200
+Processing by GameController#index as HTML
+  Parameters: {"reload"=>"true"}
+Processing by GameController#ranking as HTML
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='index',application='CountryGuessr',controller='game'*/[0m
+  [1m[36mImage Exists? (1.9ms)[0m  [1m[34mSELECT 1 AS one FROM "images" WHERE "images"."id" NOT IN (7, 9, 10) LIMIT 1 /*action='index',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:49:in `next_unique_image'
+  [1m[36mImage Load (1.6ms)[0m  [1m[34mSELECT "images".* FROM "images" WHERE "images"."id" NOT IN (7, 9, 10) /*action='index',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:54:in `next_unique_image'
+  Rendering layout layouts/application.html.erb
+  Rendering game/index.html.erb within layouts/application
+  Rendered game/_game_content.html.erb (Duration: 0.5ms | GC: 0.0ms)
+  Rendered game/index.html.erb within layouts/application (Duration: 2.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.1ms | GC: 0.0ms)
+Completed 200 OK in 1099ms (Views: 5.5ms | ActiveRecord: 5.1ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/game?reload=true" for 127.0.0.1 at 2025-04-09 15:18:55 +0200
+  Rendering layout layouts/application.html.erb
+  Rendering game/ranking.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."score" DESC LIMIT 10 /*action='ranking',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/views/game/ranking.html.erb:183:in `each_with_index'
+  Rendered game/ranking.html.erb within layouts/application (Duration: 6.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 9.1ms | GC: 0.0ms)
+Completed 200 OK in 1230ms (Views: 9.3ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/ranking" for 127.0.0.1 at 2025-04-09 15:18:56 +0200
+Processing by GameController#index as HTML
+  Parameters: {"reload"=>"true"}
+Processing by GameController#ranking as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='index',application='CountryGuessr',controller='game'*/[0m
+  [1m[36mImage Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM "images" WHERE "images"."id" NOT IN (7, 9, 10) LIMIT 1 /*action='index',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:49:in `next_unique_image'
+  [1m[36mImage Load (1.5ms)[0m  [1m[34mSELECT "images".* FROM "images" WHERE "images"."id" NOT IN (7, 9, 10) /*action='index',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:54:in `next_unique_image'
+  Rendering layout layouts/application.html.erb
+  Rendering game/index.html.erb within layouts/application
+  Rendered game/_game_content.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered game/index.html.erb within layouts/application (Duration: 1.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.8ms | GC: 0.0ms)
+Completed 200 OK in 1138ms (Views: 6.7ms | ActiveRecord: 4.1ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/game?reload=true" for 127.0.0.1 at 2025-04-09 15:18:57 +0200
+  Rendering layout layouts/application.html.erb
+  Rendering game/ranking.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."score" DESC LIMIT 10 /*action='ranking',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/views/game/ranking.html.erb:183:in `each_with_index'
+  Rendered game/ranking.html.erb within layouts/application (Duration: 2.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.4ms | GC: 0.0ms)
+Completed 200 OK in 1264ms (Views: 3.4ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Processing by GameController#index as HTML
+  Parameters: {"reload"=>"true"}
+Started GET "/ranking" for 127.0.0.1 at 2025-04-09 15:18:57 +0200
+Processing by GameController#ranking as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='index',application='CountryGuessr',controller='game'*/[0m
+  [1m[36mImage Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "images" WHERE "images"."id" NOT IN (7, 9, 10) LIMIT 1 /*action='index',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:49:in `next_unique_image'
+  [1m[36mImage Load (0.3ms)[0m  [1m[34mSELECT "images".* FROM "images" WHERE "images"."id" NOT IN (7, 9, 10) /*action='index',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:54:in `next_unique_image'
+  Rendering layout layouts/application.html.erb
+  Rendering game/index.html.erb within layouts/application
+  Rendered game/_game_content.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered game/index.html.erb within layouts/application (Duration: 1.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.0ms | GC: 0.0ms)
+Completed 200 OK in 827ms (Views: 4.0ms | ActiveRecord: 1.1ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/game?reload=true" for 127.0.0.1 at 2025-04-09 15:18:58 +0200
+Processing by GameController#index as HTML
+  Parameters: {"reload"=>"true"}
+  Rendering layout layouts/application.html.erb
+  Rendering game/ranking.html.erb within layouts/application
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."score" DESC LIMIT 10 /*action='ranking',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/views/game/ranking.html.erb:183:in `each_with_index'
+  Rendered game/ranking.html.erb within layouts/application (Duration: 8.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 12.6ms | GC: 0.0ms)
+Completed 200 OK in 1103ms (Views: 13.0ms | ActiveRecord: 1.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='index',application='CountryGuessr',controller='game'*/[0m
+  [1m[36mImage Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "images" WHERE "images"."id" NOT IN (7, 9, 10) LIMIT 1 /*action='index',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:49:in `next_unique_image'
+  [1m[36mImage Load (0.2ms)[0m  [1m[34mSELECT "images".* FROM "images" WHERE "images"."id" NOT IN (7, 9, 10) /*action='index',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:54:in `next_unique_image'
+  Rendering layout layouts/application.html.erb
+  Rendering game/index.html.erb within layouts/application
+  Rendered game/_game_content.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered game/index.html.erb within layouts/application (Duration: 0.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.6ms | GC: 0.0ms)
+Completed 200 OK in 1090ms (Views: 2.0ms | ActiveRecord: 1.1ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2025-04-09 15:25:26 +0200
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mUser Load (116.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='index',application='CountryGuessr',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:220
+  Rendered home/index.html.erb within layouts/application (Duration: 125.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 126.3ms | GC: 0.0ms)
+Completed 200 OK in 856ms (Views: 3.1ms | ActiveRecord: 123.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/game?reload=true" for 127.0.0.1 at 2025-04-09 15:25:28 +0200
+Processing by GameController#index as HTML
+  Parameters: {"reload"=>"true"}
+Started GET "/ranking" for 127.0.0.1 at 2025-04-09 15:25:28 +0200
+Processing by GameController#ranking as HTML
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='index',application='CountryGuessr',controller='game'*/[0m
+  [1m[36mImage Exists? (1.8ms)[0m  [1m[34mSELECT 1 AS one FROM "images" WHERE "images"."id" NOT IN (7, 9, 10, 6) LIMIT 1 /*action='index',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:49:in `next_unique_image'
+  [1m[36mImage Load (1.2ms)[0m  [1m[34mSELECT "images".* FROM "images" WHERE "images"."id" NOT IN (7, 9, 10, 6) /*action='index',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:54:in `next_unique_image'
+  Rendering layout layouts/application.html.erb
+  Rendering game/index.html.erb within layouts/application
+  Rendered game/_game_content.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered game/index.html.erb within layouts/application (Duration: 4.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.2ms | GC: 0.0ms)
+Completed 200 OK in 1119ms (Views: 7.8ms | ActiveRecord: 4.3ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+  Rendering layout layouts/application.html.erb
+  Rendering game/ranking.html.erb within layouts/application
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."score" DESC LIMIT 10 /*action='ranking',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/views/game/ranking.html.erb:183:in `each_with_index'
+  Rendered game/ranking.html.erb within layouts/application (Duration: 4.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.2ms | GC: 0.0ms)
+Completed 200 OK in 1215ms (Views: 4.5ms | ActiveRecord: 1.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/ranking" for 127.0.0.1 at 2025-04-09 15:25:30 +0200
+Processing by GameController#ranking as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering game/ranking.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."score" DESC LIMIT 10 /*action='ranking',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/views/game/ranking.html.erb:183:in `each_with_index'
+  Rendered game/ranking.html.erb within layouts/application (Duration: 2.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.9ms | GC: 0.0ms)
+Completed 200 OK in 592ms (Views: 3.8ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2025-04-14 10:59:44 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (2.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CountryGuessr'*/[0m
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 3.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 189.8ms | GC: 0.0ms)
+Completed 200 OK in 1958ms (Views: 303.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/assets/application-8b441ae0.css" for 127.0.0.1 at 2025-04-14 10:59:48 +0200
+Started GET "/assets/application-bfcdf840.js" for 127.0.0.1 at 2025-04-14 10:59:48 +0200
+Started GET "/assets/turbo.min-1262d735.js" for 127.0.0.1 at 2025-04-14 10:59:48 +0200
+Started GET "/assets/controllers/hello_controller-708796bd.js" for 127.0.0.1 at 2025-04-14 10:59:48 +0200
+Started GET "/assets/controllers/index-ee64e1f1.js" for 127.0.0.1 at 2025-04-14 10:59:49 +0200
+Started GET "/assets/stimulus.min-4b1e420e.js" for 127.0.0.1 at 2025-04-14 10:59:49 +0200
+Started GET "/assets/stimulus-loading-1fc53fe7.js" for 127.0.0.1 at 2025-04-14 10:59:49 +0200
+Started GET "/assets/controllers/application-3affb389.js" for 127.0.0.1 at 2025-04-14 10:59:49 +0200
+Started GET "/ranking" for 127.0.0.1 at 2025-04-14 10:59:53 +0200
+Processing by GameController#ranking as HTML
+Started GET "/game?reload=true" for 127.0.0.1 at 2025-04-14 10:59:54 +0200
+Processing by GameController#index as HTML
+  Parameters: {"reload"=>"true"}
+  Rendering layout layouts/application.html.erb
+  Rendering game/ranking.html.erb within layouts/application
+  [1m[36mUser Load (4.5ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."score" DESC LIMIT 10 /*action='ranking',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/views/game/ranking.html.erb:183:in `each_with_index'
+  Rendered game/ranking.html.erb within layouts/application (Duration: 28.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 178.0ms | GC: 0.0ms)
+Completed 200 OK in 1522ms (Views: 180.0ms | ActiveRecord: 50.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/ranking" for 127.0.0.1 at 2025-04-14 10:59:55 +0200
+Processing by GameController#ranking as HTML
+Completed 401 Unauthorized in 1599ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2025-04-14 10:59:56 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering game/ranking.html.erb within layouts/application
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."score" DESC LIMIT 10 /*action='ranking',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/views/game/ranking.html.erb:183:in `each_with_index'
+  Rendered game/ranking.html.erb within layouts/application (Duration: 5.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 10.8ms | GC: 0.0ms)
+Completed 200 OK in 1605ms (Views: 11.3ms | ActiveRecord: 1.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 1.1ms | GC: 0.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 181.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 182.5ms | GC: 0.0ms)
+Completed 200 OK in 1820ms (Views: 246.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2025-04-14 10:59:59 +0200
+Processing by HomeController#index as HTML
+Started GET "/game?reload=true" for 127.0.0.1 at 2025-04-14 11:00:00 +0200
+Processing by GameController#index as HTML
+  Parameters: {"reload"=>"true"}
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 1.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.0ms | GC: 0.0ms)
+Completed 200 OK in 1387ms (Views: 9.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Completed 401 Unauthorized in 1454ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2025-04-14 11:00:02 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.5ms | GC: 0.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 2.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.6ms | GC: 0.0ms)
+Completed 200 OK in 947ms (Views: 4.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/ranking" for 127.0.0.1 at 2025-04-14 11:00:05 +0200
+Processing by GameController#ranking as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering game/ranking.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."score" DESC LIMIT 10 /*action='ranking',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/views/game/ranking.html.erb:183:in `each_with_index'
+  Rendered game/ranking.html.erb within layouts/application (Duration: 18.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 21.3ms | GC: 0.0ms)
+Completed 200 OK in 947ms (Views: 21.3ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2025-04-14 11:00:08 +0200
+Processing by HomeController#index as HTML
+Started GET "/game?reload=true" for 127.0.0.1 at 2025-04-14 11:00:08 +0200
+Processing by GameController#index as HTML
+  Parameters: {"reload"=>"true"}
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 2.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.0ms | GC: 0.0ms)
+Completed 200 OK in 1518ms (Views: 9.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Completed 401 Unauthorized in 1706ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2025-04-14 11:00:11 +0200
+Started GET "/game?reload=true" for 127.0.0.1 at 2025-04-14 11:00:11 +0200
+Processing by Devise::SessionsController#new as HTML
+Processing by GameController#index as HTML
+  Parameters: {"reload"=>"true"}
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.5ms | GC: 0.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 3.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.6ms | GC: 0.0ms)
+Completed 200 OK in 3164ms (Views: 9.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Completed 401 Unauthorized in 3157ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2025-04-14 11:00:14 +0200
+Started GET "/game?reload=true" for 127.0.0.1 at 2025-04-14 11:00:14 +0200
+Processing by Devise::SessionsController#new as HTML
+Processing by GameController#index as HTML
+  Parameters: {"reload"=>"true"}
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 2.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.1ms | GC: 0.0ms)
+Completed 200 OK in 3329ms (Views: 5.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Completed 401 Unauthorized in 3328ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2025-04-14 11:00:18 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 1.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2.6ms | GC: 0.0ms)
+Completed 200 OK in 760ms (Views: 3.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2025-04-14 11:00:25 +0200
+Processing by Devise::SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Se connecter"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'thibaud.von-borowski@mmibordeaux.com' ORDER BY "users"."id" ASC LIMIT 1 /*action='create',application='CountryGuessr',controller='sessions'*/[0m
+Redirected to http://127.0.0.1:3000/game?reload=true
+Completed 303 See Other in 1407ms (ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/game?reload=true" for 127.0.0.1 at 2025-04-14 11:00:27 +0200
+Processing by GameController#index as TURBO_STREAM
+  Parameters: {"reload"=>"true"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='index',application='CountryGuessr',controller='game'*/[0m
+  [1m[36mImage Exists? (9.5ms)[0m  [1m[34mSELECT 1 AS one FROM "images" WHERE 1=1 LIMIT 1 /*action='index',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:49:in `next_unique_image'
+  [1m[36mImage Load (0.4ms)[0m  [1m[34mSELECT "images".* FROM "images" WHERE 1=1 /*action='index',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:54:in `next_unique_image'
+  Rendering layout layouts/application.html.erb
+  Rendering game/index.html.erb within layouts/application
+  Rendered game/_game_content.html.erb (Duration: 1.9ms | GC: 0.0ms)
+  Rendered game/index.html.erb within layouts/application (Duration: 36.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 37.8ms | GC: 0.0ms)
+Completed 200 OK in 928ms (Views: 38.5ms | ActiveRecord: 13.6ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2025-04-14 11:00:35 +0200
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='index',application='CountryGuessr',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:220
+  Rendered home/index.html.erb within layouts/application (Duration: 5.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.7ms | GC: 0.0ms)
+Completed 200 OK in 1256ms (Views: 6.6ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/ranking" for 127.0.0.1 at 2025-04-14 11:01:49 +0200
+Processing by GameController#ranking as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering game/ranking.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."score" DESC LIMIT 10 /*action='ranking',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/views/game/ranking.html.erb:183:in `each_with_index'
+  Rendered game/ranking.html.erb within layouts/application (Duration: 2.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.3ms | GC: 0.0ms)
+Completed 200 OK in 904ms (Views: 4.3ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/ranking" for 127.0.0.1 at 2025-04-14 11:01:51 +0200
+Processing by GameController#ranking as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering game/ranking.html.erb within layouts/application
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."score" DESC LIMIT 10 /*action='ranking',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/views/game/ranking.html.erb:183:in `each_with_index'
+  Rendered game/ranking.html.erb within layouts/application (Duration: 3.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.0ms | GC: 0.0ms)
+Completed 200 OK in 939ms (Views: 5.0ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/ranking" for 127.0.0.1 at 2025-04-14 11:25:06 +0200
+Processing by GameController#ranking as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering game/ranking.html.erb within layouts/application
+  [1m[36mUser Load (158.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."score" DESC LIMIT 10 /*action='ranking',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/views/game/ranking.html.erb:183:in `each_with_index'
+  Rendered game/ranking.html.erb within layouts/application (Duration: 161.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 162.8ms | GC: 0.0ms)
+Completed 200 OK in 1039ms (Views: -13.9ms | ActiveRecord: 177.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/ranking" for 127.0.0.1 at 2025-04-14 11:25:08 +0200
+Processing by GameController#ranking as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering game/ranking.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."score" DESC LIMIT 10 /*action='ranking',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/views/game/ranking.html.erb:183:in `each_with_index'
+  Rendered game/ranking.html.erb within layouts/application (Duration: 2.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.1ms | GC: 0.0ms)
+Completed 200 OK in 940ms (Views: 5.0ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2025-04-14 11:25:12 +0200
+Processing by HomeController#index as HTML
+Started GET "/game?reload=true" for 127.0.0.1 at 2025-04-14 11:25:13 +0200
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='index',application='CountryGuessr',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:220
+  Rendered home/index.html.erb within layouts/application (Duration: 5.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 9.4ms | GC: 0.0ms)
+Completed 200 OK in 1133ms (Views: 11.1ms | ActiveRecord: 1.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2025-04-14 11:25:13 +0200
+Processing by GameController#index as HTML
+  Parameters: {"reload"=>"true"}
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='index',application='CountryGuessr',controller='game'*/[0m
+  [1m[36mImage Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "images" WHERE "images"."id" != 7 LIMIT 1 /*action='index',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:49:in `next_unique_image'
+  [1m[36mImage Load (1.8ms)[0m  [1m[34mSELECT "images".* FROM "images" WHERE "images"."id" != 7 /*action='index',application='CountryGuessr',controller='game'*/[0m
+  ↳ app/controllers/game_controller.rb:54:in `next_unique_image'
+  Rendering layout layouts/application.html.erb
+  Rendering game/index.html.erb within layouts/application
+  Rendered game/_game_content.html.erb (Duration: 0.5ms | GC: 0.0ms)
+  Rendered game/index.html.erb within layouts/application (Duration: 2.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.0ms | GC: 0.0ms)
+Completed 200 OK in 2237ms (Views: 6.5ms | ActiveRecord: 5.1ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='index',application='CountryGuessr',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:220
+  Rendered home/index.html.erb within layouts/application (Duration: 5.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.1ms | GC: 0.0ms)
+Completed 200 OK in 2293ms (Views: 7.7ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2025-04-14 11:25:16 +0200
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='index',application='CountryGuessr',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:220
+  Rendered home/index.html.erb within layouts/application (Duration: 10.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 14.9ms | GC: 0.0ms)
+Completed 200 OK in 1019ms (Views: 14.9ms | ActiveRecord: 1.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2025-04-14 11:25:17 +0200
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1 /*action='index',application='CountryGuessr',controller='home'*/[0m
+  ↳ app/views/home/index.html.erb:220
+  Rendered home/index.html.erb within layouts/application (Duration: 5.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.5ms | GC: 0.0ms)
+Completed 200 OK in 1060ms (Views: 7.5ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
